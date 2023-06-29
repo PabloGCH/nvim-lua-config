@@ -1,9 +1,12 @@
 --IMPORTANT: Don't forget to install netcoredbg
 local dap = require('dap')
 
+local HOME = os.getenv "HOME"
+local DEBUGGER_LOCATION = HOME .. "/.config/nvim/netcoredbg"
+
 dap.adapters.netcoredbg = {
   type = 'executable',
-  command = '/usr/bin/netcoredbg',
+  command = DEBUGGER_LOCATION .. '/netcoredbg',
   args = {'--interpreter=vscode'}
 }
 
