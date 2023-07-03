@@ -9,5 +9,6 @@ require 'smooth-scroll-config'
 require 'treesitter-config'
 require 'telescope-config'
 require 'mapping'
+require 'nvim-dap'
 
 vim.cmd("colorscheme ayu-dark")
