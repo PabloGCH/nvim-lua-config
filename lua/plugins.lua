@@ -4,6 +4,9 @@ return require('packer').startup(function(use)
     --THEME
     use 'Shatur/neovim-ayu'
 
+    --Formatting
+    use 'sbdchd/neoformat'
+
     --Language server providers
     use "williamboman/mason.nvim"
     use "williamboman/mason-lspconfig.nvim"

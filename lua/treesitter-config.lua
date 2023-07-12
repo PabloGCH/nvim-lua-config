@@ -1,6 +1,6 @@
 require'nvim-treesitter.configs'.setup {
     -- A list of parser names, or "all"
-    ensure_installed = { "rust", "javascript", "typescript", "json", "css", "html", "lua", "vim" },
+    ensure_installed = { "rust", "javascript", "typescript", "json", "css", "html", "lua", "vim", "c_sharp" },
 
     -- Install parsers synchronously (only applied to `ensure_installed`)
     sync_install = false,
@@ -14,6 +14,10 @@ require'nvim-treesitter.configs'.setup {
 
     ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
     -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
+    
+    indent = {
+        enable = false
+    },
 
     highlight = {
         -- `false` will disable the whole extension
