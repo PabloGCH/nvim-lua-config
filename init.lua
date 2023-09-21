@@ -10,6 +10,7 @@ require 'treesitter-config'
 require 'telescope-config'
 require 'mapping'
 require 'nvim-dap'
+require 'nvim-dap-ui'
 require 'neoformat-config'
 
 vim.cmd("colorscheme ayu-dark")

@@ -16,6 +16,7 @@ return require('packer').startup(function(use)
 
     --Debugging
     use 'mfussenegger/nvim-dap'
+    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
     
     --NVIM TREE
     use 'ryanoasis/vim-devicons'
