@@ -17,4 +17,3 @@ function format()
     end
 end
 
-vim.keymap.set('n', '<A-f>', ':lua format()<CR>', { noremap = true })
