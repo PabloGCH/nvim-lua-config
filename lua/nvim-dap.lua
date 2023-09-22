@@ -37,9 +37,9 @@ vim.keymap.set('n', '<F10>', ':lua require"dap".step_over()<CR>', {noremap = tru
 vim.keymap.set('n', '<F11>', ':lua require"dap".step_into()<CR>', {noremap = true, silent = true})
 vim.keymap.set('n', '<F12>', ':lua require"dap".step_out()<CR>', {noremap = true, silent = true})
 vim.keymap.set('n', '<A-b>', ':lua require"dap".toggle_breakpoint()<CR>', {noremap = true, silent = true})
-vim.keymap.set('n', '<A-B>', ':lua require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>', {noremap = true, silent = true})
-vim.keymap.set('n', '<A-lp>', ':lua require"dap".set_breakpoint(nil, nil, vim.fn.input("Log point message: "))<CR>', {noremap = true, silent = true})
-vim.keymap.set('n', '<A-o>', ':lua require"dap".repl.open()<CR>', {noremap = true, silent = true})
-vim.keymap.set('n', '<A-rl>', ':lua require"dap".run_last()<CR>', {noremap = true, silent = true})
+--vim.keymap.set('n', '<A-B>', ':lua require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>', {noremap = true, silent = true})
+--vim.keymap.set('n', '<A-lp>', ':lua require"dap".set_breakpoint(nil, nil, vim.fn.input("Log point message: "))<CR>', {noremap = true, silent = true})
+--vim.keymap.set('n', '<A-o>', ':lua require"dap".repl.open()<CR>', {noremap = true, silent = true})
+--vim.keymap.set('n', '<A-rl>', ':lua require"dap".run_last()<CR>', {noremap = true, silent = true})
 
 
