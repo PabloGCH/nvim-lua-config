@@ -3,5 +3,6 @@ require('telescope').setup {
         find_files = {
             previewer = false
         }
-    }
+    },
+    initial_mode = 'normal'
 }
