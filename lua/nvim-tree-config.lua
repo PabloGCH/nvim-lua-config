@@ -12,6 +12,13 @@ require'nvim-tree'.setup{
   git = {
     ignore = false
   },
+  actions = {
+    open_file = {
+      window_picker = {
+        enable = false
+      }
+    }
+  },
   renderer = {
     root_folder_label = false,
     indent_width = 3,
