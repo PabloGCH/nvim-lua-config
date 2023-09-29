@@ -18,3 +18,5 @@ vim.o.expandtab = true
 vim.o.autoindent = true
 vim.o.lazyredraw = true
 vim.o.ttyfast = true
+
+

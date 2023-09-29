@@ -30,7 +30,8 @@ require("mason-lspconfig").setup_handlers {
             on_attach = csharp_on_attach,
             handlers = {
                 ["textDocument/definition"] = require('omnisharp_extended').handler
-            }
+            },
+            semanticHighlighting = false
         }
     end
 

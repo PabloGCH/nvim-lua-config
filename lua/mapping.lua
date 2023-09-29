@@ -52,6 +52,10 @@ vim.keymap.set('n', '<A-9>', '9gt', {noremap = true, silent = true})
 vim.keymap.set('n', '<A-l>', ':tabnext<CR>', {noremap = true, silent = true})
 -- MOVE TO PREVIOUS TAB
 vim.keymap.set('n', '<A-h>', ':tabNext<CR>', {noremap = true, silent = true})
+-- MOVE TAB TO LEFT
+vim.keymap.set('n', '<A-S-h>', ':tabmove -1<CR>', {noremap = true, silent = true})
+-- MOVE TAB TO RIGHT
+vim.keymap.set('n', '<A-S-l>', ':tabmove +1<CR>', {noremap = true, silent = true})
 
 
 
