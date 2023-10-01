@@ -25,9 +25,10 @@ return require('packer').startup(function(use)
     use 'lukas-reineke/indent-blankline.nvim'
     --LUALINE
     use 'nvim-lualine/lualine.nvim'
-    --BUFFERLINE (TAB BARS)
-    use 'moll/vim-bbye'
-    use 'akinsho/bufferline.nvim'
+    --TABBAR
+    use 'nanozuki/tabby.nvim'
+    --use 'akinsho/bufferline.nvim' --BUFFERLINE (TAB BARS)
+    --use 'moll/vim-bbye'
     --SMOOTH-SCROLL
     use 'karb94/neoscroll.nvim'
     --TREESITTER

@@ -12,5 +12,6 @@ require 'mapping'
 require 'nvim-dap'
 require 'nvim-dap-ui'
 require 'neoformat-config'
+require 'tabby-config'
 
 vim.cmd("colorscheme ayu-dark")
