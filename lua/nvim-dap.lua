@@ -7,6 +7,25 @@ local DEBUGGER_LOCATION = HOME .. "/.config/nvim/netcoredbg"
 local code = require('dap.ext.vscode')
 
 
+function selectChoice(choices)
+  local choice = vim.fn.inputlist(choices)
+  print('\n')
+  if tonumber(choice) ~= nil then
+    choice = tonumber(choice)
+  end
+  if choice == nil then
+    choice = selectChoice(choices)
+  end
+  if choice <= 0 then
+    choice = selectChoice(choices)
+  end
+  if choice > #choices then
+    choice = selectChoice(choices)
+  end
+  return choice
+end
+
+
 -- FUNCTION TO GET DLL
 -- ===========================0
 -- I actually got this code from help of github copilot, but I only have a general idea of how it works
@@ -31,8 +50,13 @@ function get_dll() --Looks for dlls in ./bin/Debug/net* and lists them
         local filename = dll
         table.insert(choices, filename)
     end
+    -- adds a number to the beginning of each path string
+    for i, choice in ipairs(choices) do
+        choices[i] = i .. ': ' .. choice
+    end
     -- shows the list of dlls and returns the selected one
-    local choice = vim.fn.inputlist(choices)
+    local choice = selectChoice(choices)
+    print('\n')
     if choice <= 0 then
         return
     end
@@ -42,6 +66,8 @@ function get_dll() --Looks for dlls in ./bin/Debug/net* and lists them
     --returns the full path to the dll
     return dlls[choice]
 end
+
+
 
 function getDotnetEnvVariables()
   -- finds launchSettings.json file in current directory
@@ -60,23 +86,19 @@ function getDotnetEnvVariables()
     end
 
     -- shows the list of profiles and returns the selected one
-    local choice = vim.fn.inputlist(choices)
-    if choice <= 0 then
-      return nil
-    end
-    if choice > #choices then
-      return nil
-    end
+    local choice = selectChoice(choices)
     -- returns table with config
     local profile = launchSettings.profiles[profiles[choice]]
     local config = {}
     config.ASPNETCORE_ENVIRONMENT = profile.environmentVariables.ASPNETCORE_ENVIRONMENT
     config.ASPNETCORE_URLS = profile.applicationUrl
-    print(vim.inspect(config))
     return config
   end
   return nil
 end
+
+
+
 
 dap.adapters.coreclr = {
     type = 'executable',
