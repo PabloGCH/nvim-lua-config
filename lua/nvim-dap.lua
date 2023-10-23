@@ -1,10 +1,11 @@
 --IMPORTANT: Don't forget to install netcoredbg
 --local dap = require('dap')
 
-
 local dap = require('dap')
 local HOME = os.getenv("HOME")
 local DEBUGGER_LOCATION = HOME .. "/.config/nvim/netcoredbg"
+local code = require('dap.ext.vscode')
+
 
 -- FUNCTION TO GET DLL
 -- ===========================0
@@ -35,8 +36,46 @@ function get_dll() --Looks for dlls in ./bin/Debug/net* and lists them
     if choice <= 0 then
         return
     end
+    if choice > #choices then
+        return
+    end
     --returns the full path to the dll
     return dlls[choice]
+end
+
+function getDotnetEnvVariables()
+  -- finds launchSettings.json file in current directory
+  local launchSettingsPath = vim.fn.globpath(vim.fn.getcwd(), 'Properties/launchSettings.json', false, true)[1]
+  if launchSettingsPath ~= nil then
+    local launchSettings = vim.fn.json_decode(vim.fn.readfile(launchSettingsPath))
+    -- creates list of key strings from the launchSettings profiles object
+    local profiles = {}
+    for key, _ in pairs(launchSettings.profiles) do
+      table.insert(profiles, key)
+    end
+    -- adds a number to the beginning of each key string
+    local choices = {}
+    for i, profile in ipairs(profiles) do
+      table.insert(choices, i .. ': ' .. profile)
+    end
+
+    -- shows the list of profiles and returns the selected one
+    local choice = vim.fn.inputlist(choices)
+    if choice <= 0 then
+      return nil
+    end
+    if choice > #choices then
+      return nil
+    end
+    -- returns table with config
+    local profile = launchSettings.profiles[profiles[choice]]
+    local config = {}
+    config.ASPNETCORE_ENVIRONMENT = profile.environmentVariables.ASPNETCORE_ENVIRONMENT
+    config.ASPNETCORE_URLS = profile.applicationUrl
+    print(vim.inspect(config))
+    return config
+  end
+  return nil
 end
 
 dap.adapters.coreclr = {
@@ -50,24 +89,57 @@ dap.configurations.cs = {
     type = "coreclr",
     name = "launch - netcoredbg",
     request = "launch",
-    program = get_dll
-    -- The following code is from daps documentation is commented out because it's not very practical
-    -- to write the path to the dll every time you want to debug
-    -- it's commented out because i don't want to loose it
-    --program = function() 
-    --    return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
-    --end,
+    program = get_dll,
+    env =  getDotnetEnvVariables
   },
 }
+
 
 vim.keymap.set('n', '<F5>', ':lua require"dap".continue()<CR>', {noremap = true, silent = true})
 vim.keymap.set('n', '<F10>', ':lua require"dap".step_over()<CR>', {noremap = true, silent = true})
 vim.keymap.set('n', '<F11>', ':lua require"dap".step_into()<CR>', {noremap = true, silent = true})
 vim.keymap.set('n', '<F12>', ':lua require"dap".step_out()<CR>', {noremap = true, silent = true})
 vim.keymap.set('n', '<A-b>', ':lua require"dap".toggle_breakpoint()<CR>', {noremap = true, silent = true})
+
+
+
+
+
+--STUFF I COMMENTED OUT BUT COULD BE USEFUL IN THE FUTURE
+--=========================================================
+
+--MAPPING
+--------------------------------------------
 --vim.keymap.set('n', '<A-B>', ':lua require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>', {noremap = true, silent = true})
 --vim.keymap.set('n', '<A-lp>', ':lua require"dap".set_breakpoint(nil, nil, vim.fn.input("Log point message: "))<CR>', {noremap = true, silent = true})
 --vim.keymap.set('n', '<A-o>', ':lua require"dap".repl.open()<CR>', {noremap = true, silent = true})
 --vim.keymap.set('n', '<A-rl>', ':lua require"dap".run_last()<CR>', {noremap = true, silent = true})
 
+--LOADS LAUNCH.JSON FILE FROM .VSCODE FOLDER
+--------------------------------------------
+--Looks for launch.json and returns the path to it
+--function getLaunchSettingsPath()
+--  local launchPath = vim.fn.globpath(vim.fn.getcwd(), '.vscode/launch.json', false, true)[1]
+--  if launchPath ~= nil then
+--    return launchPath
+--  end
+--  return nil
+--end
+--local launchSettingsPath = getLaunchSettingsPath()
+--code.load_launchjs(launchSettingsPath, { coreclr = {'cs'} })
 
+-- DEFAULT CONFIGURATION
+--------------------------------------------
+--dap.configurations.cs = {
+--  {
+--    type = "coreclr",
+--    name = "launch - netcoredbg",
+--    request = "launch",
+--    -- The following code is from daps documentation is commented out because it's not very practical
+--    -- to write the path to the dll every time you want to debug
+--    -- it's commented out because i don't want to loose it
+--    program = function() 
+--        return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+--    end,
+--  },
+--}
