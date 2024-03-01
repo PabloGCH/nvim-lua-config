@@ -3,6 +3,7 @@ local formats = {
     typescript = "prettier",
     html = "prettier",
     css = "prettier",
+    scss = "prettier",
     json = "prettier",
     javascript = "prettier",
 }
