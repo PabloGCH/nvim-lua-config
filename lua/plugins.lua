@@ -16,7 +16,6 @@ return require('packer').startup(function(use)
     use 'neovim/nvim-lspconfig'
     use 'Hoffs/omnisharp-extended-lsp.nvim'
 
-
     --Debugging
     use 'https://github.com/nvim-neotest/nvim-nio'
     use 'mfussenegger/nvim-dap'
@@ -27,16 +26,21 @@ return require('packer').startup(function(use)
     use 'kyazdani42/nvim-web-devicons'
     use 'kyazdani42/nvim-tree.lua'
     use 'lukas-reineke/indent-blankline.nvim'
+
     --LUALINE
     use 'nvim-lualine/lualine.nvim'
+
     --TABBAR
     use 'nanozuki/tabby.nvim'
+
     --use 'akinsho/bufferline.nvim' --BUFFERLINE (TAB BARS)
     --use 'moll/vim-bbye'
+
     --SMOOTH-SCROLL
     use 'karb94/neoscroll.nvim'
+
     --TREESITTER
-    --use 'nvim-treesitter/nvim-treesitter'
+    use 'nvim-treesitter/nvim-treesitter'
 
     --NVIM-CMP
     use 'hrsh7th/cmp-nvim-lsp'
