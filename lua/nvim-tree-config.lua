@@ -1,6 +1,6 @@
 --CONFIGURATION OF FLOAT WINDOW
 local gwidth = vim.api.nvim_list_uis()[1].width
-local width = 120
+local width = 200
 local height = 30
 
 
@@ -21,7 +21,7 @@ require'nvim-tree'.setup{
   },
   renderer = {
     root_folder_label = false,
-    indent_width = 3,
+    indent_width = 2,
     indent_markers = {
       enable = true,
       inline_arrows = true,
@@ -37,7 +37,7 @@ require'nvim-tree'.setup{
     relativenumber = false,
     signcolumn = "yes",
     float = {
-      enable = true,
+      enable = false,
       quit_on_focus_loss = true,
       open_win_config = {
         relative = "editor",
