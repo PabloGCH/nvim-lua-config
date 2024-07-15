@@ -7,6 +7,9 @@ return require('packer').startup(function(use)
     --Formatting
     use 'sbdchd/neoformat'
 
+    --Copilot
+    use 'github/copilot.vim'
+
     --Language server providers
     use "williamboman/mason.nvim"
     use "williamboman/mason-lspconfig.nvim"
@@ -15,6 +18,7 @@ return require('packer').startup(function(use)
 
 
     --Debugging
+    use 'https://github.com/nvim-neotest/nvim-nio'
     use 'mfussenegger/nvim-dap'
     use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
     
@@ -32,7 +36,7 @@ return require('packer').startup(function(use)
     --SMOOTH-SCROLL
     use 'karb94/neoscroll.nvim'
     --TREESITTER
-    use 'nvim-treesitter/nvim-treesitter'
+    --use 'nvim-treesitter/nvim-treesitter'
 
     --NVIM-CMP
     use 'hrsh7th/cmp-nvim-lsp'
