@@ -8,7 +8,7 @@ return require('packer').startup(function(use)
     use 'sbdchd/neoformat'
 
     --Copilot
-    use 'github/copilot.vim'
+    --use 'github/copilot.vim'
 
     --Language server providers
     use "williamboman/mason.nvim"
